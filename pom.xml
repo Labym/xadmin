@@ -41,6 +41,7 @@
         <springfox.version>2.9.2</springfox.version>
         <h2database.version>1.4.197</h2database.version>
         <guava.version>25.1-jre</guava.version>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
 
@@ -136,6 +137,14 @@
                 <artifactId>spring-security-oauth2</artifactId>
                 <version>${spring-security-oauth.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

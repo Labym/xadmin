@@ -2,8 +2,8 @@ package com.labym.flood.config;
 
 public interface FloodConstants {
 
-    String PHONE_PATTERN="^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
-    String EMAIL_PATTERN="[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?";
+    String PHONE_PATTERN = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+    String EMAIL_PATTERN = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?";
     // Spring profiles for development, test and production, see https://www.jhipster.tech/profiles/
     String SPRING_PROFILE_DEVELOPMENT = "dev";
     String SPRING_PROFILE_TEST = "test";
@@ -20,4 +20,7 @@ public interface FloodConstants {
     String SPRING_PROFILE_NO_LIQUIBASE = "no-liquibase";
     // Spring profile used when deploying to Kubernetes and OpenShift
     String SPRING_PROFILE_K8S = "k8s";
+
+    String SYSTEM_ACCOUNT = "system";
+    String ANONYMOUS_USER = "anonymoususer";
 }
