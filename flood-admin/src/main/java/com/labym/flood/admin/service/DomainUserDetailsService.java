@@ -1,6 +1,7 @@
 package com.labym.flood.admin.service;
 
 
+import com.google.common.collect.Lists;
 import com.labym.flood.admin.common.util.UserUtils;
 import com.labym.flood.admin.constant.AccountType;
 import com.labym.flood.admin.constant.StatusCode;
@@ -64,7 +65,12 @@ public class DomainUserDetailsService implements UserDetailsService {
         if (!user.isActivated()) {
             throw new UserNotActivatedException("User " + account.getLogin() + " was not activated");
         }
-        List<GrantedAuthority> grantedAuthorities = null;
+        List<GrantedAuthority> grantedAuthorities = Lists.newArrayList(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return "ADMIN";
+            }
+        });
         return new org.springframework.security.core.userdetails.User(account.getLogin(),
                 account.getHash(),
                 grantedAuthorities);

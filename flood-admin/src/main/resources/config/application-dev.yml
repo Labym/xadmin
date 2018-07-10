@@ -28,4 +28,6 @@ flood:
         exposed-headers: "Authorization,Link,X-Total-Count"
         allow-credentials: true
         max-age: 1800
+debug: true
+
 

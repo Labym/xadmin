@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
 
 
 
-
+@ComponentScan("com.labym.flood")
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class})
 public class Application {

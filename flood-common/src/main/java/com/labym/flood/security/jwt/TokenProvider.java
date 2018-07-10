@@ -1,7 +1,7 @@
 package com.labym.flood.security.jwt;
 
 import com.labym.flood.config.FloodProperties;
-import io.github.jhipster.config.JHipsterProperties;
+
 
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
 
-@Component
 public class TokenProvider {
 
     private final Logger log = LoggerFactory.getLogger(TokenProvider.class);

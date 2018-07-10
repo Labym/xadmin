@@ -1,7 +1,11 @@
 package com.labym.flood.admin.config;
 
+import com.labym.flood.config.FloodProperties;
+import com.labym.flood.security.jwt.JWTConfigurer;
+import com.labym.flood.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,40 +29,52 @@ import javax.annotation.PostConstruct;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-//    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-//
-//    private final UserDetailsService userDetailsService;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    //private final TokenProvider tokenProvider;
+    private final UserDetailsService userDetailsService;
 
     private final CorsFilter corsFilter;
 
+    private final TokenProvider tokenProvider;
+
     //private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(CorsFilter corsFilter) {
-//        this.authenticationManagerBuilder = authenticationManagerBuilder;
-//        this.userDetailsService = userDetailsService;
 
+    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService,TokenProvider tokenProvider, CorsFilter corsFilter) {
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.userDetailsService = userDetailsService;
         this.corsFilter = corsFilter;
-
+        this.tokenProvider=tokenProvider;
     }
+
+
 
     @PostConstruct
     public void init() {
-//        try {
-//            authenticationManagerBuilder
-//                    .userDetailsService(userDetailsService)
-//                    .passwordEncoder(passwordEncoder());
-//        } catch (Exception e) {
-//            throw new BeanInitializationException("Security configuration failed", e);
-//        }
+        try {
+            authenticationManagerBuilder
+                    .userDetailsService(userDetailsService)
+                    .passwordEncoder(passwordEncoder());
+        } catch (Exception e) {
+            throw new BeanInitializationException("Security configuration failed", e);
+        }
     }
 
-//    @Override
-//    @Bean
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
+
+    @Bean
+    public TokenProvider tokenProvider(FloodProperties properties){
+
+        TokenProvider tokenProvider = new TokenProvider(properties);
+        tokenProvider.init();
+        return tokenProvider;
+
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -82,6 +98,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
+//                .authenticationEntryPoint()
+//                .accessDeniedHandler()
                 .and()
                 .csrf()
                 .disable()
@@ -105,14 +123,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/v2/api-docs/**").permitAll()
                 .antMatchers("/swagger-resources/configuration/ui").permitAll()
-                ;
                 //.antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
-                //.and()
-                //.apply(securityConfigurerAdapter());
+                .and()
+                .apply(securityConfigurerAdapter());
 
     }
 
-//    private JWTConfigurer securityConfigurerAdapter() {
-//        return new JWTConfigurer(tokenProvider);
-//    }
+    private JWTConfigurer securityConfigurerAdapter() {
+        return new JWTConfigurer(tokenProvider);
+    }
 }
