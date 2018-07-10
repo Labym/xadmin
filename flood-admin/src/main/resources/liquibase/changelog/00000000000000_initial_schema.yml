@@ -1,0 +1,32 @@
+databaseChangeLog:
+- changeSet:
+    id: 00000000000000
+    author: Jing
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_accountPK
+            name: id
+            type: BIGINT
+        - column:
+            name: create_at
+            type: ${timeStamp}
+        - column:
+            constraints:
+              nullable: false
+            name: hash
+            type: VARCHAR(128)
+        - column:
+            constraints:
+              nullable: false
+            name: login
+            type: VARCHAR(100)
+        - column:
+            name: salt
+            type: VARCHAR(36)
+        tableName: tb_account
+

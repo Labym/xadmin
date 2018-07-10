@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - property:
+      name: timeStamp
+      value: TIMESTAMP
+  - include:
+      file: liquibase/changelog/00000000000000_initial_schema.yml
+      relativeToChangelogFile: false

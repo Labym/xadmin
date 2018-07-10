@@ -1,0 +1,12 @@
+
+spring:
+  application:
+    name: admin
+  jpa:
+    show-sql: true
+flood:
+  async:
+    core-pool-size: 2
+server:
+  port: 9000
+
