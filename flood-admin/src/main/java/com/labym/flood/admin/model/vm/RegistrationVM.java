@@ -1,4 +1,4 @@
-package com.labym.flood.admin.model.dto;
+package com.labym.flood.admin.model.vm;
 
 import com.labym.flood.config.FloodConstants;
 import lombok.Data;
@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
-public class RegistrationDTO {
+public class RegistrationVM {
 
     @NotNull(message = "用户名不能为空")
     @Pattern(regexp = "("+FloodConstants.EMAIL_PATTERN +")|("+FloodConstants.PHONE_PATTERN+")",message = "用户名必须是手机号码或者Email")

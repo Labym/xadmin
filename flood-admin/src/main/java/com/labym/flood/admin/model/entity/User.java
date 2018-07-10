@@ -57,13 +57,13 @@ public class User {
     @Column(length = 256)
     private String imageUrl;
 
-    @Size(max = 20)
-    @Column(length = 20)
+    @Size(max = 32)
+    @Column(length = 32)
     @JsonIgnore
     private String activationKey;
 
-    @Size(max = 20)
-    @Column(length = 20)
+    @Size(max = 32)
+    @Column(length = 32)
     @JsonIgnore
     private String resetKey;
 

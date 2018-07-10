@@ -52,7 +52,7 @@ databaseChangeLog:
             type: BOOLEAN
         - column:
             name: activation_key
-            type: VARCHAR(20)
+            type: VARCHAR(32)
         - column:
             name: email
             type: VARCHAR(254)
@@ -73,7 +73,7 @@ databaseChangeLog:
             type: ${TIMESTAMP}
         - column:
             name: reset_key
-            type: VARCHAR(20)
+            type: VARCHAR(32)
         - column:
             constraints:
               nullable: false
