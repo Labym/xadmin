@@ -4,6 +4,7 @@ package com.labym.flood.admin.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.labym.flood.admin.constant.AccountType;
 import com.labym.flood.admin.constant.Constants;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = Constants.TB_PREFIX + "account")

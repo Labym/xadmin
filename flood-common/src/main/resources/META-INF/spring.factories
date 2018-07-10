@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.labym.flood.config.swagger.SwaggerAutoConfiguration,\
+  com.labym.flood.config.swagger.SwaggerPluginsAutoConfiguration,\
+  com.labym.flood.config.FloodProperties
