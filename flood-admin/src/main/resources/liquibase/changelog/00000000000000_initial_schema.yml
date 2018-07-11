@@ -95,7 +95,7 @@ databaseChangeLog:
             type: VARCHAR(100)
         - column:
             name: create_at
-            type: BINARY(255)
+            type: ${TIMESTAMP}
         - column:
             name: create_by
             type: BIGINT
