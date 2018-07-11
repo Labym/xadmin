@@ -11,8 +11,12 @@ import java.io.IOException;
 import java.util.Map;
 
 public class MapToJsonConverter implements AttributeConverter<Map<String,Object>, String> {
+
+    public MapToJsonConverter(){
+
+    }
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    private final TypeReference<Map<String,Object>> typeReference = new TypeReference() {};
+    private final TypeReference<Map<String,Object>> typeReference = new TypeReference<Map<String,Object>>() {};
     @Override
     public String convertToDatabaseColumn(Map<String,Object> map) {
         try {
