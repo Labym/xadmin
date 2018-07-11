@@ -10,10 +10,10 @@ import java.util.Optional;
  * Implementation of AuditorAware based on Spring Security.
  */
 @Component
-public class SpringSecurityAuditorAware implements AuditorAware<String> {
+public class SpringSecurityAuditorAware implements AuditorAware<Long> {
 
     @Override
-    public Optional<String> getCurrentAuditor() {
+    public Optional<Long> getCurrentAuditor() {
         return Optional.of(SecurityUtils.getCurrentUserLogin().orElse(FloodConstants.SYSTEM_ACCOUNT));
     }
 }

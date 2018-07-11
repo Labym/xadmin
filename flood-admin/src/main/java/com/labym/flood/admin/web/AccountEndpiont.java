@@ -46,16 +46,24 @@ public class AccountEndpiont {
     @PostMapping("/authenticate")
     @Timed
     public ResponseEntity<TokenVM> authorize(@Valid @RequestBody LoginVM loginVM) {
-
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword());
-
-        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        boolean rememberMe = (loginVM.getRememberMe() == null) ? false : loginVM.getRememberMe();
-        String jwt = tokenProvider.createToken(authentication, rememberMe);
+        String jwt = userService.authorize(loginVM.getUsername(),loginVM.getPassword(),loginVM.getRememberMe().booleanValue());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
         return new ResponseEntity<>(new TokenVM(jwt), httpHeaders, HttpStatus.OK);
+    }
+
+
+    /**
+     * GET  /account : get the current user.
+     *
+     * @return the current user
+     * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
+     */
+    @GetMapping("/account")
+    @Timed
+    public UserDTO getAccount() {
+        return userService.getUserWithAuthorities()
+                .map(UserDTO::new)
+                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
     }
 }

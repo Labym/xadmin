@@ -21,6 +21,6 @@ public interface FloodConstants {
     // Spring profile used when deploying to Kubernetes and OpenShift
     String SPRING_PROFILE_K8S = "k8s";
 
-    String SYSTEM_ACCOUNT = "system";
+    Long SYSTEM_ACCOUNT = 1L;
     String ANONYMOUS_USER = "anonymoususer";
 }

@@ -100,7 +100,7 @@ public interface FloodDefaults {
 
             interface Jwt {
 
-                String secret = null;
+                String secret = "FLOOD";
                 long tokenValidityInSeconds = 1800; // 0.5 hour
                 long tokenValidityInSecondsForRememberMe = 2592000; // 30 hours;
             }
