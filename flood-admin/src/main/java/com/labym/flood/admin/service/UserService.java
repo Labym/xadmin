@@ -42,13 +42,13 @@ public class UserService {
     }
 
     @Transactional
-    public void registration(String login, String password,AccountType type){
-        if (accountRepository.existsByLoginAndType(login,type)) {
-            throw new FloodException(StatusCode.BAD_REQUEST,String.format("%s(%s)已存在",type.type(),login));
+    public void registration(String login, String password, AccountType type) {
+        if (accountRepository.existsByLoginAndType(login, type)) {
+            throw new FloodException(StatusCode.BAD_REQUEST, String.format("%s(%s)已存在", type.type(), login));
         }
-        String username=login;
-        if(AccountType.EMAIL.equals(type)){
-            username=username.substring(0,username.indexOf("@"));
+        String username = login;
+        if (AccountType.EMAIL.equals(type)) {
+            username = username.substring(0, username.indexOf("@"));
         }
 
         User user = User.builder()
@@ -59,7 +59,7 @@ public class UserService {
 
         userRepository.save(user);
 
-        String salt=IDUtils.uuid();
+        String salt = IDUtils.uuid();
         Account account = Account.builder()
                 .createAt(ZonedDateTime.now())
                 .hash(passwordEncoder.encode(salt + password))
@@ -73,24 +73,24 @@ public class UserService {
 
     }
 
-    public String authorize(String username,String password,boolean rememberMe){
+    public String authorize(String username, String password, boolean rememberMe) {
 
         AccountType accountType = UserUtils.accountType(username);
         Optional<Account> accountFromDatabase = accountRepository.findOneByLoginAndType(username, accountType);
         if (!accountFromDatabase.isPresent()) {
-            throw new FloodException(StatusCode.FORBIDDEN,"username not found");
+            throw new FloodException(StatusCode.FORBIDDEN, "username not found");
         }
         Account account = accountFromDatabase.get();
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(username, account.getSalt()+password);
+                new UsernamePasswordAuthenticationToken(username, account.getSalt() + password);
 
         Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return tokenProvider.createToken(authentication, rememberMe);
     }
 
-    public UserDTO getUserWithAuthorities(){
-        SecurityUtils.getCurrentUserLogin().map(userRepository.findById())
+    public Optional<User> getUserWithAuthorities() {
+        return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findById);
     }
 
 }

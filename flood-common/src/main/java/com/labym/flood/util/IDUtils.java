@@ -10,7 +10,7 @@ public class IDUtils {
     private IDUtils(){}
     private static final String RC4_KEY="FLOOD";
     private static final String RC4_SUFFIX=":flood";
-    private static final RC4Util RC4=new RC4Util(RC4_KEY);
+    private static final RC4 RC4=new RC4(RC4_KEY);
 
     public static String uuid(){
         return UUID.randomUUID().toString().replace("-","");

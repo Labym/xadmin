@@ -1,10 +1,13 @@
 package com.labym.flood.admin.web;
 
 import com.labym.flood.admin.common.util.UserUtils;
+import com.labym.flood.admin.constant.StatusCode;
+import com.labym.flood.admin.model.dto.UserDTO;
 import com.labym.flood.admin.model.vm.LoginVM;
 import com.labym.flood.admin.model.vm.RegistrationVM;
 import com.labym.flood.admin.model.vm.TokenVM;
 import com.labym.flood.admin.service.UserService;
+import com.labym.flood.exception.FloodException;
 import com.labym.flood.security.jwt.JWTConfigurer;
 import com.labym.flood.security.jwt.TokenProvider;
 import io.micrometer.core.annotation.Timed;
@@ -64,6 +67,6 @@ public class AccountEndpiont {
     public UserDTO getAccount() {
         return userService.getUserWithAuthorities()
                 .map(UserDTO::new)
-                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+                .orElseThrow(() -> new FloodException(StatusCode.INTERNAL_SERVER_ERROR,"User could not be found"));
     }
 }

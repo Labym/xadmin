@@ -2,6 +2,7 @@ package com.labym.flood.security.jwt;
 
 import com.labym.flood.config.FloodProperties;
 import com.labym.flood.security.SecurityUser;
+import com.labym.flood.util.IDUtils;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class TokenProvider {
     private final Logger log = LoggerFactory.getLogger(TokenProvider.class);
 
     private static final String AUTHORITIES_KEY = "auth";
-    private static final String USER_ID_KEY = "auth";
+    private static final String USER_ID_KEY = "flood_id";
 
     private final Base64.Encoder encoder = Base64.getEncoder();
 
@@ -70,7 +71,7 @@ public class TokenProvider {
         return Jwts.builder()
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
-            .claim("",details.getId())
+            .claim(USER_ID_KEY,IDUtils.encode(details.getId()))
             .signWith(SignatureAlgorithm.HS512, secretKey)
             .setExpiration(validity)
             .compact();
@@ -87,7 +88,10 @@ public class TokenProvider {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        User principal = new User(claims.getSubject(), "", authorities);
+
+        String userIdRc4 = claims.get(USER_ID_KEY, String.class);
+
+        SecurityUser principal = new SecurityUser(IDUtils.decode(userIdRc4),claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }

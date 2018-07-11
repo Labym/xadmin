@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class RC4Util {
+public class RC4 {
     private static final int SBOX_LENGTH = 256;
     private static final int KEY_MIN_LENGTH = 5;
     /**
@@ -19,11 +19,11 @@ public class RC4Util {
      */
     private int[] sbox = new int[SBOX_LENGTH];
 
-    public RC4Util() {
+    public RC4() {
         reset();
     }
 
-    public RC4Util(String key) throws InvalidKeyException {
+    public RC4(String key) throws InvalidKeyException {
         this();
         setKey(key);
     }
@@ -163,28 +163,6 @@ public class RC4Util {
 
         this.key = key.getBytes();
     }
-
-    public static void main(String[] args) throws DecoderException {
-        String key="123123123";
-
-        RC4Util c=new RC4Util(key);
-
-
-        byte[] bytes = c.crypt(Bytes.toBytes(4));
-
-
-        String s = Hex.encodeHexString(bytes);
-        System.out.println(String.valueOf(s));
-
-
-        byte[] bytes1 = Hex.decodeHex(s);
-
-        byte[] bytes2 = c.crypt(bytes1);
-        System.out.println(Bytes.toLong(bytes2));
-
-
-    }
-
 }
 
 /**
