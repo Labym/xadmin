@@ -24,14 +24,14 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-public class AccountEndpiont {
+public class AccountEndpoint {
 
     private final UserService userService;
     private final TokenProvider tokenProvider;
 
     private final AuthenticationManager authenticationManager;
 
-    public AccountEndpiont(UserService userService, TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+    public AccountEndpoint(UserService userService, TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;

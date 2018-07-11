@@ -2,7 +2,6 @@ package com.labym.flood.admin.model.entity;
 
 import com.labym.flood.admin.constant.Constants;
 import com.labym.flood.admin.constant.ResourceType;
-import com.labym.flood.config.FloodConstants;
 import com.labym.flood.converter.MapToJsonConverter;
 import lombok.Data;
 
@@ -13,7 +12,13 @@ import java.util.Map;
 
 @Data
 @Entity
-@Table(name = Constants.TB_PREFIX+"RESOURCE")
+@Table(name = Constants.TB_PREFIX + "RESOURCE",
+        indexes = {
+                @Index(columnList = "name", unique = true),
+                @Index(columnList = "code", unique = true),
+                @Index(columnList = "resource_type")
+        }
+)
 public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +31,7 @@ public class Resource {
     private String code;
     private Long parentId;
     private Double sort;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "resource_type")
     private ResourceType type;

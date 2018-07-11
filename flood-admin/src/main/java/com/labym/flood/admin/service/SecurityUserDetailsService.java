@@ -27,14 +27,14 @@ import java.util.Optional;
  * Authenticate a user from the database.
  */
 @Component("userDetailsService")
-public class DomainUserDetailsService implements UserDetailsService {
+public class SecurityUserDetailsService implements UserDetailsService {
 
-    private final Logger log = LoggerFactory.getLogger(DomainUserDetailsService.class);
+    private final Logger log = LoggerFactory.getLogger(SecurityUserDetailsService.class);
 
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
 
-    public DomainUserDetailsService(UserRepository userRepository, AccountRepository accountRepository) {
+    public SecurityUserDetailsService(UserRepository userRepository, AccountRepository accountRepository) {
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
     }
