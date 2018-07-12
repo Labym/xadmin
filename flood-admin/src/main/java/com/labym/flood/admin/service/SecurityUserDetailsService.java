@@ -26,6 +26,7 @@ import java.util.Optional;
 /**
  * Authenticate a user from the database.
  */
+@Transactional(readOnly = true)
 @Component("userDetailsService")
 public class SecurityUserDetailsService implements UserDetailsService {
 
@@ -40,7 +41,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating {}", login);
 

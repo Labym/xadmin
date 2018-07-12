@@ -7,6 +7,8 @@ spring:
     name: admin
   jpa:
     show-sql: true
+  datasource:
+    tr
 flood:
   async:
     core-pool-size: 2

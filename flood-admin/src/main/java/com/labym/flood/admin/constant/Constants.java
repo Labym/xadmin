@@ -4,7 +4,9 @@ import javax.persistence.GenerationType;
 
 public interface Constants {
 
-    public static final String TB_PREFIX="tb_";
+    String TB_PREFIX="tb_";
 
-    public static final GenerationType aa=GenerationType.IDENTITY;
+    GenerationType aa=GenerationType.IDENTITY;
+
+    Long ROOT_RESOURCE_PARENT_ID=0l;
 }

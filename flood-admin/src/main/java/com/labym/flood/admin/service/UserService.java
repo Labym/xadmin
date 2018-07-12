@@ -73,7 +73,7 @@ public class UserService {
         accountRepository.save(account);
 
     }
-
+    @Transactional(readOnly = true)
     public String authorize(String username, String password, boolean rememberMe) {
 
         AccountType accountType = UserUtils.accountType(username);
@@ -89,7 +89,7 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return tokenProvider.createToken(authentication, rememberMe);
     }
-
+    @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities() {
         return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findById);
     }
