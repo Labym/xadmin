@@ -1,7 +1,7 @@
 databaseChangeLog:
 - changeSet:
-    id: 000000000000
-    author: zhangjingl02
+    id: 1531384813999-1
+    author: Jing
     changes:
     - createTable:
         columns:
@@ -14,7 +14,7 @@ databaseChangeLog:
             type: BIGINT
         - column:
             name: create_at
-            type: ${TIMESTAMP}
+            type: BINARY(255)
         - column:
             constraints:
               nullable: false
@@ -35,52 +35,6 @@ databaseChangeLog:
             name: user_id
             type: BIGINT
         tableName: tb_account
-
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              primaryKey: true
-              primaryKeyName: tb_userPK
-            name: id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-            name: activated
-            type: BOOLEAN
-        - column:
-            name: activation_key
-            type: VARCHAR(32)
-        - column:
-            name: email
-            type: VARCHAR(254)
-        - column:
-            name: first_name
-            type: VARCHAR(50)
-        - column:
-            name: image_url
-            type: VARCHAR(256)
-        - column:
-            name: lang_key
-            type: VARCHAR(6)
-        - column:
-            name: last_name
-            type: VARCHAR(50)
-        - column:
-            name: reset_at
-            type: ${TIMESTAMP}
-        - column:
-            name: reset_key
-            type: VARCHAR(32)
-        - column:
-            constraints:
-              nullable: false
-            name: username
-            type: VARCHAR(50)
-        tableName: tb_user
-
     - createTable:
         columns:
         - column:
@@ -95,7 +49,7 @@ databaseChangeLog:
             type: VARCHAR(100)
         - column:
             name: create_at
-            type: ${TIMESTAMP}
+            type: BINARY(255)
         - column:
             name: create_by
             type: BIGINT
@@ -118,7 +72,53 @@ databaseChangeLog:
             name: url
             type: VARCHAR(1000)
         tableName: tb_resource
-
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_userPK
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: activated
+            type: BOOLEAN
+        - column:
+            name: activation_key
+            type: VARCHAR(32)
+        - column:
+            name: create_at
+            type: BINARY(255)
+        - column:
+            name: email
+            type: VARCHAR(254)
+        - column:
+            name: first_name
+            type: VARCHAR(50)
+        - column:
+            name: image_url
+            type: VARCHAR(256)
+        - column:
+            name: lang_key
+            type: VARCHAR(6)
+        - column:
+            name: last_name
+            type: VARCHAR(50)
+        - column:
+            name: reset_at
+            type: BINARY(255)
+        - column:
+            name: reset_key
+            type: VARCHAR(32)
+        - column:
+            constraints:
+              nullable: false
+            name: username
+            type: VARCHAR(50)
+        tableName: tb_user
     - addUniqueConstraint:
         columnNames: email
         constraintName: UC_TB_USEREMAIL_COL
@@ -127,24 +127,50 @@ databaseChangeLog:
         columnNames: username
         constraintName: UC_TB_USERUSERNAME_COL
         tableName: tb_user
-
     - addUniqueConstraint:
         columnNames: name
         constraintName: UKaunvlvm32xb4e6590jc9oooq
         tableName: tb_resource
-
     - addUniqueConstraint:
         columnNames: code
         constraintName: UKro6du8tug92p98fny4xa2jm5t
         tableName: tb_resource
-
+    - createIndex:
+        columns:
+        - column:
+            name: last_name
+        indexName: IDX3cefdhs8glj3444f8f61qq6bn
+        tableName: tb_user
+    - createIndex:
+        columns:
+        - column:
+            name: account_type
+        indexName: IDXblm8dcd992hmabb4ipxb0ojwo
+        tableName: tb_account
+    - createIndex:
+        columns:
+        - column:
+            name: user_id
+        indexName: IDXdb2b2maq9e5pf9l02mbpl28o0
+        tableName: tb_account
+    - createIndex:
+        columns:
+        - column:
+            name: login
+        indexName: IDXe5f59xcdkwe3y0e8obtxkmmwe
+        tableName: tb_account
     - createIndex:
         columns:
         - column:
             name: resource_type
         indexName: IDXf3xricpvdp614bdegb5pv8sto
         tableName: tb_resource
-
+    - createIndex:
+        columns:
+        - column:
+            name: first_name
+        indexName: IDXnkyiu4onyw9b4jfm740ftptah
+        tableName: tb_user
     - addForeignKeyConstraint:
         baseColumnNames: user_id
         baseTableName: tb_account

@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -61,7 +62,7 @@ public class UserService {
 
         String salt = IDUtils.uuid();
         Account account = Account.builder()
-                .createAt(ZonedDateTime.now())
+                .createAt(LocalDateTime.now())
                 .hash(passwordEncoder.encode(salt + password))
                 .salt(salt)
                 .type(type)

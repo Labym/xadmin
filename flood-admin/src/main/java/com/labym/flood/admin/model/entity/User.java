@@ -12,16 +12,23 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = Constants.TB_PREFIX + "user")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = Constants.TB_PREFIX + "user",indexes = {
+        @Index(columnList = "username"),
+        @Index(columnList = "firstName"),
+        @Index(columnList = "lastName"),
+        @Index(columnList = "email")
+})
 public class User {
 
     private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +74,8 @@ public class User {
     @JsonIgnore
     private String resetKey;
 
-    @Column
+
     private Instant resetAt = null;
+
+    private LocalDateTime createAt;
 }

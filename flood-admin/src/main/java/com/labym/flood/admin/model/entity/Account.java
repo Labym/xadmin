@@ -10,14 +10,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
-@Table(name = Constants.TB_PREFIX + "account")
+@Table(name = Constants.TB_PREFIX + "account",
+        indexes = {
+                @Index(columnList = "userId"),
+                @Index(columnList = "login"),
+                @Index(columnList = "account_type")
+        })
 public class Account {
+
+
 
 
     @Id
@@ -36,7 +44,7 @@ public class Account {
     @Enumerated(EnumType.STRING)
     @Column(name = "account_type", length = 10)
     private AccountType type;
-    private ZonedDateTime createAt;
 
+    private LocalDateTime createAt;
 
 }

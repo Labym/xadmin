@@ -1,17 +1,24 @@
 package com.labym.flood.admin.model.entity;
 
 import com.labym.flood.admin.constant.Constants;
+import com.labym.flood.admin.constant.EntityState;
 import com.labym.flood.admin.constant.ResourceType;
 import com.labym.flood.converter.MapToJsonConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Map;
 
-
+@Builder
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = Constants.TB_PREFIX + "RESOURCE",
         indexes = {
                 @Index(columnList = "name", unique = true),
@@ -20,6 +27,7 @@ import java.util.Map;
         }
 )
 public class Resource {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,8 +43,9 @@ public class Resource {
     @Enumerated(EnumType.STRING)
     @Column(name = "resource_type")
     private ResourceType type;
-    private Instant createAt;
     private Long createBy;
+
+    private LocalDateTime createAt;
 
     @Lob
     @Convert(converter = MapToJsonConverter.class)
