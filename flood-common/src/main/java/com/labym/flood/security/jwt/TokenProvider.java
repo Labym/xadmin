@@ -65,7 +65,7 @@ public class TokenProvider {
         } else {
             validity = new Date(now + this.tokenValidityInMilliseconds);
         }
-        SecurityUser details = (SecurityUser)authentication.getDetails();
+        SecurityUser details = (SecurityUser)authentication.getPrincipal();
 
 
         return Jwts.builder()

@@ -12,9 +12,10 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:file:/target/db/jhipstersampleapplication;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-        username: jhipsterSampleApplication
-        password: jwt
+        #url: jdbc:h2:file:/target/db/jhipstersampleapplication;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        url: jdbc:mysql://localhost:3306/flood?autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+        username: root
+        password: rootroot
     h2:
         console:
             enabled: true
@@ -29,6 +30,6 @@ flood:
         exposed-headers: "Authorization,Link,X-Total-Count"
         allow-credentials: true
         max-age: 1800
-debug: true
+
 
 
