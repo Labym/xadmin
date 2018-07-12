@@ -11,6 +11,9 @@ import com.labym.flood.exception.FloodException;
 import com.labym.flood.security.jwt.JWTConfigurer;
 import com.labym.flood.security.jwt.TokenProvider;
 import io.micrometer.core.annotation.Timed;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
+import io.swagger.annotations.AuthorizationScope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +40,9 @@ public class AccountEndpoint {
         this.authenticationManager = authenticationManager;
     }
 
+    @ApiOperation(
+            value = "用户注册"
+    )
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,10 +52,13 @@ public class AccountEndpoint {
     }
 
 
+    @ApiOperation(
+            value = "用户登陆"
+    )
     @PostMapping("/authenticate")
     @Timed
     public ResponseEntity<TokenVM> authorize(@Valid @RequestBody LoginVM loginVM) {
-        String jwt = userService.authorize(loginVM.getUsername(),loginVM.getPassword(),loginVM.getRememberMe().booleanValue());
+        String jwt = userService.authorize(loginVM.getUsername(), loginVM.getPassword(), loginVM.getRememberMe().booleanValue());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
         return new ResponseEntity<>(new TokenVM(jwt), httpHeaders, HttpStatus.OK);
@@ -62,11 +71,21 @@ public class AccountEndpoint {
      * @return the current user
      * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
      */
-    @GetMapping("/account")
+    @ApiOperation(value = "获取当前用户信息", authorizations = {
+            @Authorization(
+                    value = "petoauth",
+                    scopes = {
+                            @AuthorizationScope(scope = "add:pet"
+                                    , description = "allows adding of pets")
+                    }
+            )
+    }
+    )
+    @GetMapping("/userinfo")
     @Timed
     public UserDTO getAccount() {
         return userService.getUserWithAuthorities()
                 .map(UserDTO::new)
-                .orElseThrow(() -> new FloodException(StatusCode.INTERNAL_SERVER_ERROR,"User could not be found"));
+                .orElseThrow(() -> new FloodException(StatusCode.INTERNAL_SERVER_ERROR, "User could not be found"));
     }
 }
