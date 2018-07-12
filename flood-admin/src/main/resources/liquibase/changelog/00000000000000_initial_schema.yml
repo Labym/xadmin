@@ -14,7 +14,7 @@ databaseChangeLog:
             type: BIGINT
         - column:
             name: create_at
-            type: BINARY(255)
+            type: ${TIMESTAMP}
         - column:
             constraints:
               nullable: false
@@ -49,7 +49,7 @@ databaseChangeLog:
             type: VARCHAR(100)
         - column:
             name: create_at
-            type: BINARY(255)
+            type: ${TIMESTAMP}
         - column:
             name: create_by
             type: BIGINT
@@ -91,7 +91,7 @@ databaseChangeLog:
             type: VARCHAR(32)
         - column:
             name: create_at
-            type: BINARY(255)
+            type: ${TIMESTAMP}
         - column:
             name: email
             type: VARCHAR(254)

@@ -26,6 +26,7 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class UserService {
 
     private final AccountRepository accountRepository;
@@ -73,7 +74,7 @@ public class UserService {
         accountRepository.save(account);
 
     }
-    @Transactional(readOnly = true)
+
     public String authorize(String username, String password, boolean rememberMe) {
 
         AccountType accountType = UserUtils.accountType(username);
@@ -89,7 +90,7 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return tokenProvider.createToken(authentication, rememberMe);
     }
-    @Transactional(readOnly = true)
+
     public Optional<User> getUserWithAuthorities() {
         return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findById);
     }
