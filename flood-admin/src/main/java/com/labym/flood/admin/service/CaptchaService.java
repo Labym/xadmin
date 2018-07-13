@@ -94,11 +94,10 @@ public class CaptchaService {
 
         try {
             CaptchaVM captcha = new CaptchaVM();
-            captcha.setType("image/jpeg");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(buffImg, "jpeg", baos);
             byte[] bytes = baos.toByteArray();
-            captcha.setData(Base64.getEncoder().encodeToString(bytes));
+            captcha.setData("data:image/jpeg;base64,"+Base64.getEncoder().encodeToString(bytes));
             return captcha;
         } catch (IOException e) {
             throw new FloodException(StatusCode.INTERNAL_SERVER_ERROR, "生成验证码失败!", e);

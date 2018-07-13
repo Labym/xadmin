@@ -2,7 +2,7 @@
 spring:
   profiles:
     include: swagger
-    active: '@spring.profiles.active@'
+    active: dev
   application:
     name: admin
   jpa:
@@ -25,7 +25,5 @@ management:
   endpoints:
     web:
       base-path: /actuator
-
-
 
 

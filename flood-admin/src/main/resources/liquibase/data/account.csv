@@ -1,0 +1,2 @@
+id,create_at,hash,login,salt,account_type,user_id
+1,2018-07-12 21:26:12,$2a$10$GKrIM.hr.m8pNX/Osn9G1.g.dmvkk6GI6CKGzUmYY4UpEWlCZOiJG,admin@a.com,64ccd6bac91b4c40b1df25e6873353cd,EMAIL,1

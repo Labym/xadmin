@@ -109,7 +109,7 @@ databaseChangeLog:
             type: VARCHAR(50)
         - column:
             name: reset_at
-            type: BINARY(255)
+            type: ${TIMESTAMP}
         - column:
             name: reset_key
             type: VARCHAR(32)
@@ -180,4 +180,10 @@ databaseChangeLog:
         referencedColumnNames: id
         referencedTableName: tb_user
         validate: true
+    - loadData:
+        tableName: tb_user
+        file: liquibase/data/user.csv
+    - loadData:
+        tableName: tb_account
+        file: liquibase/data/account.csv
 
