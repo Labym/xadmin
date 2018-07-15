@@ -25,11 +25,13 @@ public class UserEndpoint {
     }
 
     @GetMapping("/{userId}")
+    @SecurityConfiguration
     public ResponseEntity<User> userInfo(@PathVariable Long userId){
         return ResponseUtil.wrapOrNotFound(userRepository.findById(userId));
     }
 
     @GetMapping
+    @SecurityConfiguration
     public ResponseEntity userList(Pageable pageable){
         Page<User> users = userRepository.findAll(pageable);
         return ResponseEntity.ok(users);

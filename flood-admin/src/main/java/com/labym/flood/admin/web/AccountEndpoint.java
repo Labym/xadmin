@@ -71,7 +71,10 @@ public class AccountEndpoint {
      * @return the current user
      * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be returned
      */
-    @ApiOperation(value = "获取当前用户信息", authorizations = {
+    @ApiOperation(value = "获取当前用户信息",
+
+            authorizations = {
+
             @Authorization(
                     value = "petoauth",
                     scopes = {

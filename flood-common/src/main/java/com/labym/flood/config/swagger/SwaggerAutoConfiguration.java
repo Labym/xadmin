@@ -7,6 +7,7 @@ import java.util.*;
 import javax.servlet.Servlet;
 
 
+import com.google.common.collect.Lists;
 import com.labym.flood.config.FloodConstants;
 import com.labym.flood.config.FloodProperties;
 import com.labym.flood.config.swagger.customizer.FloodSwaggerCustomizer;
@@ -25,11 +26,12 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ParameterBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -151,11 +153,32 @@ public class SwaggerAutoConfiguration {
                 .genericModelSubstitutes(ResponseEntity.class)
                 .select()
                 .paths(regex(managementContextPath + ".*"))
-                .build();
+                .build()
+                .securitySchemes(securitySchemes())
+                .securityContexts(securityContexts())
+                ;
     }
 
     protected Docket createDocket() {
         return new Docket(DocumentationType.SWAGGER_2);
     }
-
+    private List<ApiKey> securitySchemes() {
+        return Lists.newArrayList(
+                new ApiKey("Authorization", "Authorization", "header"));
+    }
+    private List<SecurityContext> securityContexts() {
+        return Lists.newArrayList(
+                SecurityContext.builder()
+                        .securityReferences(defaultAuth())
+                        .forPaths(PathSelectors.regex("/api/**"))
+                        .build()
+        );
+    }
+    List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return Lists.newArrayList(
+                new SecurityReference("Authorization", authorizationScopes));
+    }
 }
