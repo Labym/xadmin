@@ -11,11 +11,11 @@ spring:
     jackson:
         serialization.indent_output: true
     jpa:
-      database: h2
+      database: mysql
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:jhipstersampleapplication;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-        #url: jdbc:mysql://localhost:3306/flood?autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+        #url: jdbc:h2:mem:jhipstersampleapplication;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        url: jdbc:mysql://localhost:3306/flood?autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
         username: root
         password: rootroot
     h2:

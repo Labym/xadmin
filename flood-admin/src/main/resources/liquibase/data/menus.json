@@ -1,0 +1,64 @@
+[
+  {
+    "code": "systemManager",
+    "extensions": {
+      "icon": "setting"
+    },
+    "id": 0,
+    "name": "系统设置",
+    "parentId": 0,
+    "sort": 0,
+    "type": "MENU",
+    "url": "/system-manager"
+  },
+  {
+    "code": "setting",
+    "extensions": { "icon": "setting"},
+    "id": 0,
+    "name": "系统管里",
+    "parentId": 1,
+    "sort": 0,
+    "type": "MENU",
+    "url": "/setting"
+  },
+  {
+    "code": "users",
+    "extensions": { "icon": "user"},
+    "id": 0,
+    "name": "用户管理",
+    "parentId": 2,
+    "sort": 0,
+    "type": "MENU",
+    "url": "/users"
+  },
+  {
+    "code": "roles",
+    "extensions": {"icon": "trademark"},
+    "id": 0,
+    "name": "角色管理",
+    "parentId": 2,
+    "sort": 0,
+    "type": "MENU",
+    "url": "/roles"
+  },
+  {
+    "code": "resources",
+    "extensions": {"icon": "table"},
+    "id": 0,
+    "name": "资源管理",
+    "parentId": 2,
+    "sort": 0,
+    "type": "MENU",
+    "url": "/resources"
+  },
+  {
+    "code": "",
+    "extensions": {"icon": "cluster"},
+    "id": 0,
+    "name": "部门管理",
+    "parentId": 2,
+    "sort": 0,
+    "type": "MENU",
+    "url": "/department"
+  }
+]

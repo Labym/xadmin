@@ -186,4 +186,9 @@ databaseChangeLog:
     - loadData:
         tableName: tb_account
         file: liquibase/data/account.csv
+#    - loadData:
+#        tableName: tb_resource
+#        file: liquibase/data/resource.csv
+    - sqlFile:
+        path: liquibase/data/resource.sql
 

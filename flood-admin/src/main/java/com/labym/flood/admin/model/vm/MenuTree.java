@@ -33,7 +33,7 @@ public class MenuTree extends ArrayList<MenuVM> {
                 tree.add(menu);
             }
         });
-        return null;
+        return tree;
     }
 
     private static void buildChildren(MenuVM parent,List<MenuVM> menus){

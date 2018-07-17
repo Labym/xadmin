@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,7 +29,6 @@ import java.time.LocalDateTime;
 public class User {
 
     private static final long serialVersionUID = 1L;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,4 +78,12 @@ public class User {
     private Instant resetAt = null;
 
     private LocalDateTime createAt;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = Constants.TB_PREFIX + "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    @JsonIgnore
+    private Set<Role> roles;
 }

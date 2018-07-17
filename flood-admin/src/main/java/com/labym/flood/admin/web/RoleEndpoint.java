@@ -3,21 +3,17 @@ package com.labym.flood.admin.web;
 import com.labym.flood.admin.model.entity.Resource;
 import com.labym.flood.admin.service.ResourceService;
 import io.micrometer.core.annotation.Timed;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/menus")
-public class ResourceEndpoint {
+@RequestMapping("/api/roles")
+public class RoleEndpoint {
 
     private final ResourceService resourceService;
 
-    public ResourceEndpoint(ResourceService resourceService) {
+    public RoleEndpoint(ResourceService resourceService) {
         this.resourceService = resourceService;
     }
 

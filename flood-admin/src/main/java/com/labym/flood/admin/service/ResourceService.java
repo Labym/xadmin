@@ -27,23 +27,22 @@ public class ResourceService {
         this.resourceRepository = resourceRepository;
     }
 
-    public MenuTree currentUserMenus(){
+    public MenuTree currentUserMenus() {
         Long userId = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new FloodException(ACCESS_DENIED, "Current user login not found"));
         List<MenuVM> menus = resourceRepository.findByType(ResourceType.MENU).stream().map(MenuVM::new).collect(Collectors.toList());
         return MenuTree.buildTree(menus);
     }
 
     /**
-     *
      * @param resource
      */
     @Transactional
-    public void create(Resource resource){
-        SecurityUtils.getCurrentUserLogin().map((user)->{
+    public void create(Resource resource) {
+        SecurityUtils.getCurrentUserLogin().map((user) -> {
             resource.setCreateAt(LocalDateTime.now());
             resource.setCreateBy(user);
             resourceRepository.save(resource);
-            return null;
+            return resource;
         }).orElseThrow(() -> new FloodException(ACCESS_DENIED, "Current user login not found"));
     }
 }

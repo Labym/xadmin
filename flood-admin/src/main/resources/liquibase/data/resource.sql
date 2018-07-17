@@ -1,0 +1,6 @@
+INSERT INTO flood.tb_resource (id, code, create_at, create_by, extensions, name, parent_id, sort, resource_type, url) VALUES (1, 'systemManager', '2018-07-17 14:38:40', 1, '{"icon":"setting"}', '系统设置', 0, 0, 'MENU', '/system-manager');
+INSERT INTO flood.tb_resource (id, code, create_at, create_by, extensions, name, parent_id, sort, resource_type, url) VALUES (2, 'setting', '2018-07-17 14:39:19', 1, '{"icon":"setting"}', '系统管里', 1, 0, 'MENU', '/setting');
+INSERT INTO flood.tb_resource (id, code, create_at, create_by, extensions, name, parent_id, sort, resource_type, url) VALUES (3, 'users', '2018-07-17 14:39:35', 1, '{"icon":"user"}', '用户管理', 2, 0, 'MENU', '/users');
+INSERT INTO flood.tb_resource (id, code, create_at, create_by, extensions, name, parent_id, sort, resource_type, url) VALUES (4, 'roles', '2018-07-17 14:39:46', 1, '{"icon":"trademark"}', '角色管理', 2, 2, 'MENU', '/roles');
+INSERT INTO flood.tb_resource (id, code, create_at, create_by, extensions, name, parent_id, sort, resource_type, url) VALUES (5, 'resources', '2018-07-17 14:39:58', 1, '{"icon":"table"}', '资源管理', 2, 3, 'MENU', '/resources');
+INSERT INTO flood.tb_resource (id, code, create_at, create_by, extensions, name, parent_id, sort, resource_type, url) VALUES (6, 'department', '2018-07-17 14:40:07', 1, '{"icon":"cluster"}', '部门管理', 2, 1, 'MENU', '/department');
