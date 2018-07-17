@@ -1,0 +1,51 @@
+databaseChangeLog:
+- changeSet:
+    id: 1531384813999-6
+    author: Jing
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: tb_account
+        constraintName: FKitvyuneukg2ht98owmkq9p5v9
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tb_user
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: tb_user_role
+        constraintName: FK7vn3h53d0tqdimm8cp45gc0kl
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tb_user
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: role_id
+        baseTableName: tb_user_role
+        constraintName: FKea2ootw6b6bb0xt3ptl28bymv
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tb_role
+        validate: true
+
+    - addForeignKeyConstraint:
+        baseColumnNames: resource_id
+        baseTableName: tb_role_resource
+        constraintName: FK868kc8iic48ilv5npa80ut6qo
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tb_resource
+        validate: true
+    - addForeignKeyConstraint:
+        baseColumnNames: role_id
+        baseTableName: tb_role_resource
+        constraintName: FK7ffc7h6obqxflhj1aq1mk20jk
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tb_role
+        validate: true

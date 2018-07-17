@@ -154,8 +154,8 @@ public class SwaggerAutoConfiguration {
                 .select()
                 .paths(regex(managementContextPath + ".*"))
                 .build()
-                .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
+                .securitySchemes(Collections.singletonList(new ApiKey("Authorization", "Authorization", "header")))
+                //.securityContexts(securityContexts())
                 ;
     }
 
@@ -170,7 +170,7 @@ public class SwaggerAutoConfiguration {
         return Lists.newArrayList(
                 SecurityContext.builder()
                         .securityReferences(defaultAuth())
-                        .forPaths(PathSelectors.regex("/api/**"))
+                        .forPaths(PathSelectors.regex("/api/.*"))
                         .build()
         );
     }

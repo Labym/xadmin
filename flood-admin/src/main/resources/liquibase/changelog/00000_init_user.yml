@@ -1,0 +1,78 @@
+databaseChangeLog:
+- changeSet:
+    id: 1531384813999-1
+    author: Jing
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_userPK
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: activated
+            type: BOOLEAN
+        - column:
+            name: activation_key
+            type: VARCHAR(32)
+        - column:
+            name: create_at
+            type: ${TIMESTAMP}
+        - column:
+            name: email
+            type: VARCHAR(254)
+        - column:
+            name: first_name
+            type: VARCHAR(50)
+        - column:
+            name: image_url
+            type: VARCHAR(256)
+        - column:
+            name: lang_key
+            type: VARCHAR(6)
+        - column:
+            name: last_name
+            type: VARCHAR(50)
+        - column:
+            name: reset_at
+            type: ${TIMESTAMP}
+        - column:
+            name: reset_key
+            type: VARCHAR(32)
+        - column:
+            constraints:
+              nullable: false
+            name: username
+            type: VARCHAR(50)
+        tableName: tb_user
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: UC_TB_USEREMAIL_COL
+        tableName: tb_user
+    - addUniqueConstraint:
+        columnNames: username
+        constraintName: UC_TB_USERUSERNAME_COL
+        tableName: tb_user
+
+    - createIndex:
+        columns:
+        - column:
+            name: last_name
+        indexName: IDX3cefdhs8glj3444f8f61qq6bn
+        tableName: tb_user
+
+    - createIndex:
+        columns:
+        - column:
+            name: first_name
+        indexName: IDXnkyiu4onyw9b4jfm740ftptah
+        tableName: tb_user
+
+    - loadData:
+        tableName: tb_user
+        file: liquibase/data/user.csv

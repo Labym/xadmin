@@ -1,0 +1,60 @@
+databaseChangeLog:
+- changeSet:
+    id: 1531384813999-2
+    author: Jing
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_accountPK
+            name: id
+            type: BIGINT
+        - column:
+            name: create_at
+            type: ${TIMESTAMP}
+        - column:
+            constraints:
+              nullable: false
+            name: hash
+            type: VARCHAR(128)
+        - column:
+            constraints:
+              nullable: false
+            name: login
+            type: VARCHAR(100)
+        - column:
+            name: salt
+            type: VARCHAR(36)
+        - column:
+            name: account_type
+            type: VARCHAR(10)
+        - column:
+            name: user_id
+            type: BIGINT
+        tableName: tb_account
+
+    - createIndex:
+        columns:
+        - column:
+            name: account_type
+        indexName: IDXblm8dcd992hmabb4ipxb0ojwo
+        tableName: tb_account
+    - createIndex:
+        columns:
+        - column:
+            name: user_id
+        indexName: IDXdb2b2maq9e5pf9l02mbpl28o0
+        tableName: tb_account
+    - createIndex:
+        columns:
+        - column:
+            name: login
+        indexName: IDXe5f59xcdkwe3y0e8obtxkmmwe
+        tableName: tb_account
+
+    - loadData:
+        tableName: tb_account
+        file: liquibase/data/account.csv

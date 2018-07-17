@@ -3,5 +3,25 @@ databaseChangeLog:
       name: TIMESTAMP
       value: timestamp
   - include:
-      file: liquibase/changelog/00000000000000_initial_schema.yml
+      file: liquibase/changelog/00000_init_account.yml
+      relativeToChangelogFile: false
+  - include:
+      file: liquibase/changelog/00000_init_user.yml
+      relativeToChangelogFile: false
+  - include:
+      file: liquibase/changelog/00000_init_resource.yml
+      relativeToChangelogFile: false
+  - include:
+      file: liquibase/changelog/00000_init_role.yml
+      relativeToChangelogFile: false
+  - include:
+      file: liquibase/changelog/00000_init_user_role.yml
+      relativeToChangelogFile: false
+
+  - include:
+      file: liquibase/changelog/00000_init_role_resource.yml
+      relativeToChangelogFile: false
+
+  - include:
+      file: liquibase/changelog/00000_init_fk.yml
       relativeToChangelogFile: false

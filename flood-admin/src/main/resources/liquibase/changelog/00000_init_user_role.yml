@@ -1,0 +1,18 @@
+databaseChangeLog:
+- changeSet:
+    id: 1531833569563-6
+    author: zhangjingl02
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+            name: user_id
+            type: BIGINT
+        - column:
+            constraints:
+              primaryKey: true
+            name: role_id
+            type: BIGINT
+        tableName: tb_user_role

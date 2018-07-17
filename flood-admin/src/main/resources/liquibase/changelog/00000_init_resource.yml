@@ -1,0 +1,60 @@
+databaseChangeLog:
+- changeSet:
+    id: 1531384813999-1
+    author: Jing
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_resourcePK
+            name: id
+            type: BIGINT
+        - column:
+            name: code
+            type: VARCHAR(100)
+        - column:
+            name: create_at
+            type: ${TIMESTAMP}
+        - column:
+            name: create_by
+            type: BIGINT
+        - column:
+            name: extensions
+            type: BLOB
+        - column:
+            name: name
+            type: VARCHAR(100)
+        - column:
+            name: parent_id
+            type: BIGINT
+        - column:
+            name: sort
+            type: DOUBLE
+        - column:
+            name: resource_type
+            type: VARCHAR(255)
+        - column:
+            name: url
+            type: VARCHAR(1000)
+        tableName: tb_resource
+
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UKaunvlvm32xb4e6590jc9oooq
+        tableName: tb_resource
+    - addUniqueConstraint:
+        columnNames: code
+        constraintName: UKro6du8tug92p98fny4xa2jm5t
+        tableName: tb_resource
+
+    - createIndex:
+        columns:
+        - column:
+            name: resource_type
+        indexName: IDXf3xricpvdp614bdegb5pv8sto
+        tableName: tb_resource
+    - sqlFile:
+        path: liquibase/data/resource.sql

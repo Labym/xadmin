@@ -14,14 +14,14 @@ public class FloodMethodSecurityExpressionHandler extends DefaultMethodSecurityE
 
     @Override
     public void setReturnObject(Object returnObject, EvaluationContext ctx) {
-        ((MethodSecurityExpressionRoot) ctx.getRootObject().getValue()).setReturnObject(returnObject);
+        //((MethodSecurityExpressionRoot) ctx.getRootObject().getValue()).setReturnObject(returnObject);
     }
 
     @Override
     protected MethodSecurityExpressionOperations createSecurityExpressionRoot(Authentication authentication,
                                                                               MethodInvocation invocation) {
         final FloodMethodSecurityExpressionRoot root = new FloodMethodSecurityExpressionRoot(authentication);
-        root.setThis(invocation.getThis());
+        //root.setThis(invocation.getThis());
         root.setPermissionEvaluator(getPermissionEvaluator());
         root.setTrustResolver(this.trustResolver);
         root.setRoleHierarchy(getRoleHierarchy());

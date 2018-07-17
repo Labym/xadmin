@@ -1,14 +1,16 @@
 package com.labym.flood.admin.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.labym.flood.admin.constant.Constants;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 @Data
 @Entity
-@Table(name = Constants.TB_PREFIX + "USER")
+@Table(name = Constants.TB_PREFIX + "ROLE")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +23,12 @@ public class Role {
 
     private Long createBy;
     private ZonedDateTime createAt;
+
+    @ManyToMany
+    @JoinTable( name = Constants.TB_PREFIX+"ROLE_RESOURCE",
+            joinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "resource_id",referencedColumnName = "id")
+    )
+    @JsonIgnore
+    private Set<Resource> resources;
 }
