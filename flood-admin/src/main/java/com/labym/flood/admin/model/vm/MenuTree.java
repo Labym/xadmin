@@ -43,6 +43,11 @@ public class MenuTree extends ArrayList<MenuVM> {
                 parent.children().add(menuVM);
             }
         }));
+
+        if (CollectionUtils.isEmpty(parent.getChildren())) {
+            parent.setChildren(Collections.emptyList());
+        }
+
     }
 }
 
