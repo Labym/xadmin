@@ -43,7 +43,7 @@ public class Resource {
     private String url;
     @Column(length = 100)
     private String code;
-    private Long parentId=0L;
+    private Long parentId;
     private Double sort=0D;
 
     @NotNull

@@ -1,29 +1,33 @@
 package com.labym.flood.admin.web;
 
+import com.labym.flood.admin.constant.ResourceType;
 import com.labym.flood.admin.model.entity.Resource;
+import com.labym.flood.admin.model.entity.Resource_;
+import com.labym.flood.admin.repository.ResourceRepository;
 import com.labym.flood.admin.service.ResourceService;
 import io.micrometer.core.annotation.Timed;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/menus")
+@RequestMapping("/api/resources")
 public class ResourceEndpoint {
 
     private final ResourceService resourceService;
+    private final ResourceRepository resourceRepository;
 
-    public ResourceEndpoint(ResourceService resourceService) {
+    public ResourceEndpoint(ResourceService resourceService, ResourceRepository resourceRepository) {
         this.resourceService = resourceService;
+        this.resourceRepository = resourceRepository;
     }
 
-    @GetMapping("/current")
+    @GetMapping("/current/menus")
     @SecurityConfiguration
-    public ResponseEntity currentUserMenus(){
+    public ResponseEntity currentUserMenus() {
         return ResponseEntity.ok(resourceService.currentUserMenus());
     }
 
@@ -31,7 +35,21 @@ public class ResourceEndpoint {
     @Timed
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createResource(@RequestBody Resource resource){
+    public void createResource(@RequestBody Resource resource) {
         resourceService.create(resource);
+    }
+
+    @GetMapping
+    public ResponseEntity list(@RequestParam(required = false) String name,
+                    @RequestParam(required = false) ResourceType type, Pageable pageable) {
+        Resource resource = new Resource();
+        resource.setName(name);
+        resource.setType(type);
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher(Resource_.type.getName(), ExampleMatcher.GenericPropertyMatchers.storeDefaultMatching())
+                .withMatcher(Resource_.name.getName(), ExampleMatcher.GenericPropertyMatchers.contains());
+
+     return ResponseEntity.ok(  resourceRepository.findAll( Example.of(resource, matcher),pageable));
     }
 }
