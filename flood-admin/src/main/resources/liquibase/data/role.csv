@@ -1,0 +1,3 @@
+id,code,create_at,create_by,description,name
+1,system,2018-07-17 14:39:58,1,系统管理员,系统管理员
+2,anonymous,2018-07-17 14:39:58,1,默认用户,默认用户
