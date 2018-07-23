@@ -6,6 +6,7 @@ import com.labym.flood.admin.common.util.UserUtils;
 import com.labym.flood.admin.constant.AccountType;
 import com.labym.flood.admin.constant.StatusCode;
 import com.labym.flood.admin.model.entity.Account;
+import com.labym.flood.admin.model.entity.Role;
 import com.labym.flood.admin.model.entity.User;
 import com.labym.flood.admin.repository.AccountRepository;
 import com.labym.flood.admin.repository.UserRepository;
@@ -15,6 +16,7 @@ import com.labym.flood.security.UserNotActivatedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Authenticate a user from the database.
@@ -60,15 +64,12 @@ public class SecurityUserDetailsService implements UserDetailsService {
         if (!user.isActivated()) {
             throw new UserNotActivatedException("User " + account.getLogin() + " was not activated");
         }
-        List<GrantedAuthority> grantedAuthorities = Lists.newArrayList(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return "ADMIN";
-            }
-        });
+
+        Set<Role> roles = account.getUser().getRoles();
+        List<GrantedAuthority> authorities = roles.stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList());
         return new SecurityUser(user.getId(),account.getLogin(),
                 account.getHash(),
-                grantedAuthorities);
+                authorities);
     }
 }
 

@@ -16,3 +16,7 @@ databaseChangeLog:
             name: role_id
             type: BIGINT
         tableName: tb_user_role
+
+    - loadData:
+        tableName: tb_user_role
+        file: liquibase/data/user_role.csv

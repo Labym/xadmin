@@ -19,6 +19,11 @@ public class SecurityUser implements UserDetails {
     private final boolean enabled;
     private final Long id;
     private final Set<GrantedAuthority> authorities;
+
+    public boolean isSystemUser(){
+        return authorities.stream().anyMatch(grantedAuthority -> AuthoritiesConstants.SYSTEM_ROLE.equals(grantedAuthority.getAuthority()));
+    }
+
     public SecurityUser(Long id,String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this(id,username, password, true, true, true, true, authorities);
     }

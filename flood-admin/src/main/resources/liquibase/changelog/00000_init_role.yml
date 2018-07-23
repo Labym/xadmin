@@ -32,3 +32,7 @@ databaseChangeLog:
             name: name
             type: VARCHAR(100)
         tableName: tb_role
+
+    - loadData:
+        tableName: tb_role
+        file: liquibase/data/role.csv

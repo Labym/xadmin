@@ -26,7 +26,6 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -58,11 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
         }
-    }
-
-    @Bean
-    public FloodMethodSecurityExpressionHandler expressionHandler(){
-        return new FloodMethodSecurityExpressionHandler();
     }
 
 

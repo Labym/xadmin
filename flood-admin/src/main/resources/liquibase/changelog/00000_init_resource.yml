@@ -58,3 +58,6 @@ databaseChangeLog:
         tableName: tb_resource
     - sqlFile:
         path: liquibase/data/resource.sql
+    - loadData:
+        tableName: tb_resource
+        file: liquibase/data/resource.csv

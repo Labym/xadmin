@@ -1,11 +1,13 @@
 package com.labym.flood.security;
 
-import lombok.Setter;
+import com.labym.flood.security.annotation.Permission;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
 import org.springframework.security.core.Authentication;
 
 import java.lang.reflect.Method;
+import java.util.Optional;
 
 public class FloodMethodSecurityExpressionRoot extends SecurityExpressionRoot implements
         MethodSecurityExpressionOperations {
@@ -28,7 +30,15 @@ public class FloodMethodSecurityExpressionRoot extends SecurityExpressionRoot im
 
 
     public boolean hasPermission() {
-        return true;
+        if (SecurityUtils.getCurrentUser().map(user -> user.isSystemUser()).orElseThrow(() -> new AccessDeniedException("can't find current user"))) {
+            return true;
+        }
+        Permission permissionAnnotation = method.getAnnotation(Permission.class);
+        if(null==permissionAnnotation){
+            return true;
+        }
+        String permission = permissionAnnotation.value();
+        return SecurityUtils.currentUserHasPermission(permission);
     }
 
     public void setFilterObject(Object filterObject) {

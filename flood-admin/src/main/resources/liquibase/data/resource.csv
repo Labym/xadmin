@@ -1,7 +1,14 @@
-id,code,create_at,create_by,extensions,name,parent_id,sort,resource_type,url
-1,systemManager,2018-07-17 14:38:40,1,0x7B2269636F6E223A2273657474696E67227D,系统设置,0,0,MENU,/system-manager
-2,setting,2018-07-17 14:39:19,1,0x7B2269636F6E223A2273657474696E67227D,系统管里,1,0,MENU,/setting
-3,users,2018-07-17 14:39:35,1,0x7B2269636F6E223A2275736572227D,用户管理,2,0,MENU,/users
-4,roles,2018-07-17 14:39:46,1,0x7B2269636F6E223A2274726164656D61726B227D,角色管理,2,0,MENU,/roles
-5,resources,2018-07-17 14:39:58,1,0x7B2269636F6E223A227461626C65227D,资源管理,2,0,MENU,/resources
-6,department,2018-07-17 14:40:07,1,0x7B2269636F6E223A22636C7573746572227D,部门管理,2,0,MENU,/department
+id,code,create_at,create_by,name,parent_id,sort,resource_type
+7,user-list,2018-07-17 14:39:58,1,用户列表,3,0,PERMISSION
+8,user-create,2018-07-17 14:39:58,1,创建用户,3,0,PERMISSION
+9,user-editor,2018-07-17 14:39:58,1,编辑用户,3,0,PERMISSION
+10,role-list,2018-07-17 14:39:58,1,角色列表,4,0,PERMISSION
+11,role-create,2018-07-17 14:39:58,1,创建角色,4,0,PERMISSION
+12,role-editor,2018-07-17 14:39:58,1,编辑角色,4,0,PERMISSION
+13,resources-list,2018-07-17 14:39:58,1,资源列表,5,0,PERMISSION
+14,resources-create,2018-07-17 14:39:58,1,创建资源,5,0,PERMISSION
+15,resources-editor,2018-07-17 14:39:58,1,编辑资源,5,0,PERMISSION
+16,department-list,2018-07-17 14:39:58,1,部门列表,6,0,PERMISSION
+17,department-create,2018-07-17 14:39:58,1,创建部门,6,0,PERMISSION
+18,department-editor,2018-07-17 14:39:58,1,编辑部门,6,0,PERMISSION
+
