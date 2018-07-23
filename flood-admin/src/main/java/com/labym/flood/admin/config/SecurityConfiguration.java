@@ -1,11 +1,11 @@
 package com.labym.flood.admin.config;
 
 import com.labym.flood.config.FloodProperties;
+import com.labym.flood.security.FloodMethodSecurityExpressionHandler;
 import com.labym.flood.security.jwt.JWTConfigurer;
 import com.labym.flood.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -58,6 +58,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
         }
+    }
+
+    @Bean
+    public FloodMethodSecurityExpressionHandler expressionHandler(){
+        return new FloodMethodSecurityExpressionHandler();
     }
 
 

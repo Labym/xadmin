@@ -11,7 +11,9 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import com.labym.flood.admin.constant.PermissionEnum;
 
 @RestController
 @RequestMapping("/api/resources")
@@ -39,6 +41,7 @@ public class ResourceEndpoint {
         resourceService.create(resource);
     }
 
+    @PreAuthorize("hasPermission()")
     @GetMapping
     public ResponseEntity list(@RequestParam(required = false) String name,
                     @RequestParam(required = false) ResourceType type, Pageable pageable) {
