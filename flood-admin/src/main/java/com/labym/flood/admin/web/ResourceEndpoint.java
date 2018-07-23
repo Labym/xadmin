@@ -46,6 +46,16 @@ public class ResourceEndpoint {
     }
 
 
+    @Timed
+    @PutMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Permission(Permissions.RESOURCE_EDITOR)
+    @PreAuthorize("hasPermission()")
+    public void editorResource(@RequestBody Resource resource) {
+        resourceService.editor(resource);
+    }
+
+
     @GetMapping
     @Permission(Permissions.RESOURCE_MANAGER)
     @PreAuthorize("hasPermission()")
