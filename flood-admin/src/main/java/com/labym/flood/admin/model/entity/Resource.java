@@ -44,7 +44,7 @@ public class Resource {
     @Column(length = 100)
     private String code;
     private Long parentId;
-    private Double sort=0D;
+    private Double sort;
 
     @NotNull
     @Enumerated(EnumType.STRING)

@@ -2,8 +2,11 @@ package com.labym.flood.admin.web;
 
 import com.labym.flood.admin.constant.Permissions;
 import com.labym.flood.admin.constant.ResourceType;
+import com.labym.flood.admin.model.dto.ResourceDTO;
 import com.labym.flood.admin.model.entity.Resource;
 import com.labym.flood.admin.model.entity.Resource_;
+import com.labym.flood.admin.model.vm.MenuTree;
+import com.labym.flood.admin.model.vm.MenuVM;
 import com.labym.flood.admin.repository.ResourceRepository;
 import com.labym.flood.admin.service.ResourceService;
 import com.labym.flood.security.annotation.Permission;
@@ -15,6 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Permission(Permissions.RESOURCE_MANAGER)
 @RestController
@@ -51,7 +57,7 @@ public class ResourceEndpoint {
     @ResponseStatus(HttpStatus.CREATED)
     @Permission(Permissions.RESOURCE_EDITOR)
     @PreAuthorize("hasPermission()")
-    public void editorResource(@RequestBody Resource resource) {
+    public void editorResource(@RequestBody ResourceDTO resource) {
         resourceService.editor(resource);
     }
 
@@ -60,15 +66,28 @@ public class ResourceEndpoint {
     @Permission(Permissions.RESOURCE_MANAGER)
     @PreAuthorize("hasPermission()")
     public ResponseEntity list(@RequestParam(required = false) String name,
-                    @RequestParam(required = false) ResourceType type, Pageable pageable) {
+                               @RequestParam(required = false) ResourceType type,
+                               @RequestParam(required = false) Long parentId,
+                               Pageable pageable) {
         Resource resource = new Resource();
         resource.setName(name);
         resource.setType(type);
+        resource.setParentId(parentId);
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher(Resource_.type.getName(), ExampleMatcher.GenericPropertyMatchers.storeDefaultMatching())
                 .withMatcher(Resource_.name.getName(), ExampleMatcher.GenericPropertyMatchers.contains());
 
-     return ResponseEntity.ok(  resourceRepository.findAll( Example.of(resource, matcher),pageable));
+        return ResponseEntity.ok(resourceRepository.findAll(Example.of(resource, matcher), pageable));
+    }
+
+
+    @GetMapping("/tree")
+    @Permission(Permissions.RESOURCE_MANAGER)
+    @PreAuthorize("hasPermission()")
+    public ResponseEntity list() {
+        List<MenuVM> menuVMList = resourceRepository.findAll().stream().map(MenuVM::new).collect(Collectors.toList());
+        MenuTree menuTree = MenuTree.buildTree(menuVMList,false);
+        return ResponseEntity.ok(menuTree);
     }
 }
