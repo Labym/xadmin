@@ -1,5 +1,6 @@
 package com.labym.flood.admin.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.labym.flood.admin.constant.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import javax.persistence.*;
         indexes = {
                 @Index(columnList = "name", unique = true),
                 @Index(columnList = "code", unique = true),
-                @Index(columnList = "resource_type")
+                @Index(columnList = "group_id")
         }
 )
 public class Dictionary {
@@ -29,7 +30,8 @@ public class Dictionary {
     @Column(length = 100)
     private String code;
     @ManyToOne
-    @JoinColumn(name="id",  nullable = false)
+    @JoinColumn(name="group_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private DictionaryGroup group;
     private String value;
 }

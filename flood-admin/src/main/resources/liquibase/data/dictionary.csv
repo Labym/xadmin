@@ -1,0 +1,4 @@
+id,code,name,value,group_id
+1,ICON,图标,icon,1
+2,COMPONENT,组件,component,1
+3,PERMISSION,权限,permission,1

@@ -1,0 +1,80 @@
+databaseChangeLog:
+- changeSet:
+    id: 1532529154555-3
+    author: Jing
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_dictionaryPK
+            name: id
+            type: BIGINT
+        - column:
+            name: code
+            type: VARCHAR(100)
+        - column:
+            name: name
+            type: VARCHAR(100)
+        - column:
+            name: value
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: group_id
+            type: BIGINT
+        tableName: tb_dictionary
+
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: tb_dictionary_groupPK
+            name: id
+            type: BIGINT
+        - column:
+            name: code
+            type: VARCHAR(100)
+        - column:
+            name: create_at
+            type: ${TIMESTAMP}
+        - column:
+            name: name
+            type: VARCHAR(100)
+        tableName: tb_dictionary_group
+
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UKa7c35m3hfnbw68y9xehp2f0kf
+        tableName: tb_dictionary
+    - addUniqueConstraint:
+        columnNames: code
+        constraintName: UKea3haumm68v86j1gygdfx70i
+        tableName: tb_dictionary
+    - createIndex:
+        columns:
+        - column:
+            name: group_id
+        indexName: IDXmvn1t89ngwqdmfk9unkvuo0v4
+        tableName: tb_dictionary
+
+    - addUniqueConstraint:
+        columnNames: code
+        constraintName: UKah7ntbjganmqt98owr9luesbk
+        tableName: tb_dictionary_group
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UKg6ng0w2qo2qacespmaracv9kv
+        tableName: tb_dictionary_group
+
+    - loadData:
+        tableName: tb_dictionary_group
+        file: liquibase/data/dictionary_group.csv
+    - loadData:
+        tableName: tb_dictionary
+        file: liquibase/data/dictionary.csv

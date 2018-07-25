@@ -26,7 +26,7 @@ public class DictionaryGroupEndpoint {
     @Transactional
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(DictionaryGroup group){
+    public void create(@RequestBody DictionaryGroup group){
         if (dictionaryGroupRepository.existsByNameOrCode(group.getName(),group.getCode())) {
             throw  new BadRequestException("dictionary group's name or code already used");
         }

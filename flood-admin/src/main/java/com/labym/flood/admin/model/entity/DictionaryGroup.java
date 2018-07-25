@@ -1,5 +1,6 @@
 package com.labym.flood.admin.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.labym.flood.admin.constant.Constants;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -24,6 +25,7 @@ import java.util.Set;
 public class DictionaryGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     private Long id;
     @NotNull
     @Column(length = 100)
@@ -36,5 +38,6 @@ public class DictionaryGroup {
     private ZonedDateTime createAt;
     @ApiModelProperty(readOnly = true)
     @OneToMany(mappedBy="group")
+    @JsonIgnore
     private Set<Dictionary> dictionaries;
 }

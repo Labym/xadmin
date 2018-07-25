@@ -49,3 +49,13 @@ databaseChangeLog:
         referencedColumnNames: id
         referencedTableName: tb_role
         validate: true
+
+    - addForeignKeyConstraint:
+        baseColumnNames: group_id
+        baseTableName: tb_dictionary
+        constraintName: FKfx7hwaolw68jke0ca9anl5rtc
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tb_dictionary_group
+        validate: true

@@ -21,7 +21,9 @@ databaseChangeLog:
   - include:
       file: liquibase/changelog/00000_init_role_resource.yml
       relativeToChangelogFile: false
-
+  - include:
+      file: liquibase/changelog/00000_init_dictionary.yml
+      relativeToChangelogFile: false
   - include:
       file: liquibase/changelog/00000_init_fk.yml
       relativeToChangelogFile: false
