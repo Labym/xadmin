@@ -1,12 +1,12 @@
 package com.labym.flood.admin.model.entity;
 
 import com.labym.flood.admin.constant.Constants;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 
@@ -20,13 +20,21 @@ import java.util.Set;
                 @Index(columnList = "code", unique = true)
         }
 )
+@ToString(exclude={"dictionaries"})
 public class DictionaryGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     @Column(length = 100)
     private String name;
+    @NotNull
     @Column(length = 100)
     private String code;
+
+    @ApiModelProperty(readOnly = true)
+    private ZonedDateTime createAt;
+    @ApiModelProperty(readOnly = true)
+    @OneToMany(mappedBy="group")
     private Set<Dictionary> dictionaries;
 }
